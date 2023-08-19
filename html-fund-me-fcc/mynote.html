@@ -1,0 +1,171 @@
+
+<!-- Lesson 8: 12:45:34 -------------- HTML Setup
+
+<html lang="en">
+<head>
+    <title>Fund Me App</title>
+</head>
+<body>
+    Hello!
+</body>
+</html> -->
+
+
+<!-- Lesson 8: 12:50:11 -------- Connecting HTML to MetaMask
+    
+<html lang="en">
+  <head>
+    <title>Fund Me App</title>
+  </head>
+  <body>
+    <script>
+      console.log("hi");
+
+      // Here is to check if the user browser has a wallet i.e connection to blockchain
+      if (typeof window.ethereum !== "undefined") {
+        console.log("I see a metamask!");
+
+        window.ethereum.request({ method: "eth_requestAccounts" }); // This line is to connect to the blockchain i.e metamask
+       
+        // Now we would notice that metamask will pop up and will ask us which account we want to connect to
+        // when we now choose the account, it will show connected
+
+        // Now in metamask when we click on the three dot at the RHS we would click on connect site
+        // and bingo we would see that it says, Account 1 is connected to this site
+
+        // Now what we will notice is that if we disconnect account 1 from the site we allowed it to connect to 
+        // anytime the page refresh it will always pop up metamask for us to connect 
+        // we can stop that by creating a function that will wrap the connection to the blockchain i.e metamask
+      } else {
+        console.log("No metamask!");
+      }
+    </script>
+  </body>
+</html>  -->
+
+
+<!-- Lesson 8: 12:50:11 --------- Connecting HTML to MetaMask, still the same code for earlier but little modification here 
+    Now what we will notice is that if we disconnect account 1 from the site we allowed it to connect to 
+    anytime the page refresh it will always pop up metamask for us to connect
+    we can stop that by creating a function that will wrap the connection to the blockchain i.e metamask
+
+    so we will create a button which will give the user the preference to decide to click the connect button
+    when ready to connect to the blockchain i.e metamask 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Fund Me App</title>
+</head>
+<body>
+    <script>
+        async console.log("hello");
+        function connect() {
+          if (typeof window.ethereum !== "undefined") {
+            await window.ethereum.request({ method: "eth_requestAccounts" });
+            console.log("Connected!");
+          } else {
+            console.log("No metamask");
+          }
+        }
+      </script>
+      <button id="connectButton" onclick="connect()">Connect</button>
+
+</body>
+</html> -->
+
+
+
+<!-- Lesson 8: 12:50:11 --------- Connecting HTML to MetaMask, still the same code for earlier 
+    What we want to do now is that we want to let the user know that he is connected 
+    so we will grab the id of the button and we will change the innerHtml to connected
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Fund Me App</title>
+</head>
+<body>
+    <script>
+        async function connect() {
+          if (typeof window.ethereum !== "undefined") {
+           await window.ethereum.request({ method: "eth_requestAccounts" });
+
+           // Here we just want the user to know that after clicking the connect button
+           // the site is connected to the blockchain by chaing the button from connect
+           // to connected 
+
+           document.getElementById("connectButton").innerHTML = "Connected!"
+           console.log("Connected!"); 
+          } else {
+            document.getElementById("connectButton").innerHTML = "Please install metamask!"
+          }
+        }
+      </script>
+  
+      <button id="connectButton" onclick="connect()">Connect</button>
+
+</body>
+</html> -->
+
+
+<!-- Lesson 8: 12:59:12 --------- ES6 (Frontend Js) Vs NodeJS
+We changed the script src from text/javascript to module
+
+we use module bcos of we import ethers 
+not that when we use text/javascript it will allow us to things like this --- <button id="connectButton" onclick="connect()">Connect</button>
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Fund Me App</title>
+    </head>
+    <body>
+        <script src="./index.js" type="module"></script>
+        <button id="connectButton">Connect</button>
+
+        A button for fund
+        <button id="fundButton">Fund</button>
+    </body>
+</html> -->
+
+
+
+<!-- Lesson 8: 13:30:42 ------- Input Forms
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Fund Me App</title>
+    </head>
+    <body>
+        <script src="./index.js" type="module"></script>
+        <button id="connectButton">Connect</button>
+        <button id="fundButton">Fund</button>
+        // Form 
+        <label for="fund">ETH Amount</label>
+        <input id="ethAmount" placeholder="0.1" />
+    </body>
+</html> -->
+
+
+<!-- Lesson 8: 13:33:33 ------- Reading from the Blockchain
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Fund Me App</title>
+    </head>
+    <body>
+        <script src="./index.js" type="module"></script>
+        <button id="connectButton">Connect</button>
+        <button id="fundButton">Fund</button>
+        <button id="balanceButton">getBalance</button>
+         <-- form --
+        <label for="fund">ETH Amount</label>
+        <input id="ethAmount" placeholder="0.1" />
+    </body>
+</html> -->
+
+
+
